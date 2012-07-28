@@ -36,7 +36,7 @@ def pipeline(s, n):
     the shell pipeline (multiple words with the same count are output in
     reverse alphabetical order).
     """
-    words = sorted(sub(rexp2, " ", sub(rexp1, " ", s)).lower().translate(table).split(), reverse=True)
+    words = sub(rexp2, " ", sub(rexp1, " ", s)).lower().translate(table).split()
     counts = defaultdict(lambda: 0)
     for word in words:
         counts[word] += 1
