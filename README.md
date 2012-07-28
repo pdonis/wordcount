@@ -4,8 +4,6 @@ The Wordcount Problem
 Here are some scripts relating to the "word count problem" that was the
 subject of a memorable exchange between Donald Knuth and Doug McIlroy.
 See
-[here](http://www.leancrew.com/all-this/2011/12/more-shell-less-egg/)
-and
 [here](http://blog.peterdonis.com/opinions/still-another-nerd-interlude.html)
 for context.
 
