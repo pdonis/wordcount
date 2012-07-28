@@ -28,6 +28,14 @@ rexp1 = compile(r"([^A-Za-z])\'")
 rexp2 = compile(r"\'([^A-Za-z])")
 
 
+def uniq(words):
+    """Return dict of words vs. occurrences from iterable of words.
+    """
+    counts = defaultdict(lambda: 0)
+    for word in words:
+        counts[word] += 1
+    return counts
+
 
 def pipeline(s, n):
     """Return sorted list of n most used words in s, handling contractions.
@@ -36,21 +44,18 @@ def pipeline(s, n):
     the shell pipeline (multiple words with the same count are output in
     reverse alphabetical order).
     """
-    words = sub(rexp2, " ", sub(rexp1, " ", s)).lower().translate(table).split()
-    counts = defaultdict(lambda: 0)
-    for word in words:
-        counts[word] += 1
-    return sorted(counts.iteritems(), key=lambda x: (x[1], x[0]), reverse=True)[:nwords]
+    return sorted(
+        uniq(
+            sub(rexp2, " ", sub(rexp1, " ", s))
+            .lower()
+            .translate(table)
+            .split()
+        ).iteritems(), key=lambda x: (x[1], x[0]), reverse=True)[:n]
 
 
 if __name__ == '__main__':
     import sys
     
-    nwords = int(sys.argv[1])
-    
-    s = sys.stdin.read()
-    results = pipeline(s, nwords)
-    
-    for w, f in results:
+    for w, f in pipeline(sys.stdin.read(), int(sys.argv[1])):
         # Match the shell pipeline output format
         print str(f).rjust(7), w
