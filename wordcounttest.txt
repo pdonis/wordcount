@@ -1,5 +1,4 @@
-
-Test elimination of initial non-letter character in file.
+ Test elimination of initial non-letter character in file.
  Test elimination of initial non-letter character in line.
 Now is the time for all good men to come to the aid of their party.
 The early bird gets the worm.

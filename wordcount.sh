@@ -9,10 +9,10 @@
 # 
 # This is Doug McIlroy's six-line shell pipeline solution, for comparison
 # with the Python solution in wordcount.py. Note, though, that a line has
-# been added at the start to filter out initial non-letter characters.
+# been added (the second line) to filter out initial non-letter characters.
 
-sed '/^$/d' |
 tr -cs A-Za-z '\n' |
+sed '/^$/d' |
 tr A-Z a-z |
 sort |
 uniq -c |

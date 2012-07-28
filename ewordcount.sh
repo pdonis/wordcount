@@ -19,18 +19,16 @@
 # * Convert quotes at end of words to spaces
 # * Convert quotes at end of lines to spaces
 # 
-# The only other change is to the sixth (formerly first of McIlroy's,
-# second of the bug-fixed version--see wordcount.sh for notes on the bug
-# fix) line, to include any remaining quotes (which will be those in words
-# that are contractions) in the list of characters not converted to
-# newlines
+# The only other change is to the fifth (formerly first) line, to include
+# any remaining quotes (which will be those in words that are contractions)
+# in the list of characters not converted to newlines
 
 sed s/[^A-Za-z]\'/\ / |
 sed s/^\'/\ / |
 sed s/\'[^A-Za-z]/\ / |
 sed s/\'$/\ / |
-sed '/^$/d' |
 tr -cs \'A-Za-z '\n' |
+sed '/^$/d' |
 tr A-Z a-z |
 sort |
 uniq -c |
