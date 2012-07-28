@@ -1,5 +1,6 @@
 #!/bin/sh
 # McIlroy's shell pipeline to solve the Knuth-McIlroy problem
+# -- Note: fixed bug
 # See here: http://www.leancrew.com/all-this/2011/12/more-shell-less-egg/
 # 
 # Problem spec:
@@ -7,8 +8,10 @@
 # print out a sorted list of those words along with their frequencies.
 # 
 # This is Doug McIlroy's six-line shell pipeline solution, for comparison
-# with the Python solution in wordcount.py.
+# with the Python solution in wordcount.py. Note, though, that a line has
+# been added at the start to filter out initial non-letter characters.
 
+sed '/^$/d' |
 tr -cs A-Za-z '\n' |
 tr A-Z a-z |
 sort |
