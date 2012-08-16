@@ -11,7 +11,6 @@
 # for comparison.
 
 
-from string import lowercase, maketrans
 from collections import defaultdict
 from re import compile, sub
 
