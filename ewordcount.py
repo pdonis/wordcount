@@ -16,8 +16,7 @@ from re import compile, sub
 
 
 # Hacks to make sure every byte except lowercase ASCII and apostrophe gets
-# translated to a space; this way, using regexes, is cleaner and easier to
-# extend than the translation table method used in wordcount.py
+# translated to a space
 
 rexp1 = compile(r"([^A-Za-z])\'")
 rexp2 = compile(r"\'([^A-Za-z])")

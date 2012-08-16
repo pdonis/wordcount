@@ -13,16 +13,13 @@
 # that turns out to be easier with the Python tools at hand)
 
 
-from string import lowercase, maketrans
 from collections import defaultdict
+from re import compile, sub
 
 
 # Hack to make sure every byte except lowercase ASCII gets translated to a space
 
-_sfrom = ''.join(maketrans('', '').split(lowercase))
-_sto = ' ' * len(_sfrom)
-
-table = maketrans(_sfrom, _sto)
+rexp = compile(r"[^a-z]")
 
 
 def uniq(words):
@@ -43,8 +40,7 @@ def pipeline(s, n):
     """
     return sorted(
         uniq(
-            s.lower()
-            .translate(table)
+            sub(rexp, " ", s.lower())
             .split()
         ).iteritems(), key=lambda x: (x[1], x[0]), reverse=True)[:n]
 
