@@ -16,16 +16,13 @@ from collections import defaultdict
 from re import compile, sub
 
 
-# Hacks to make sure every byte except lowercase ASCII and apostrophe gets translated to a space
-
-_h, _t = maketrans("", "").split("'")
-_sfrom = ''.join([_h] + _t.split(lowercase))
-_sto = ' ' * len(_sfrom)
-
-table = maketrans(_sfrom, _sto)
+# Hacks to make sure every byte except lowercase ASCII and apostrophe gets
+# translated to a space; this way, using regexes, is cleaner and easier to
+# extend than the translation table method used in wordcount.py
 
 rexp1 = compile(r"([^A-Za-z])\'")
 rexp2 = compile(r"\'([^A-Za-z])")
+rexp3 = compile(r"[^a-z\']")
 
 
 def uniq(words):
@@ -46,9 +43,7 @@ def pipeline(s, n):
     """
     return sorted(
         uniq(
-            sub(rexp2, " ", sub(rexp1, " ", s))
-            .lower()
-            .translate(table)
+            sub(rexp3, " ", sub(rexp2, " ", sub(rexp1, " ", s)).lower())
             .split()
         ).iteritems(), key=lambda x: (x[1], x[0]), reverse=True)[:n]
 
