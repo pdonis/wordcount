@@ -24,5 +24,5 @@ A test text file for use as input is in ``wordcounttest.txt``.
 
 The expected outputs of the two versions, when run on the test text
 file, are in ``wordcount.out`` and ``ewordcount.out``. Note that the
-outputs include *all* the words in the file; I generated them by
+outputs include *all* of the words in the file; I generated them by
 giving a large number (150) as the argument to each script.
